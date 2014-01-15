@@ -1,0 +1,14 @@
+<!-- http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=5205&useShortTitles=true -->
+<body>
+    <predictions agencyTitle="San Francisco Muni, CA" routeTag="N" routeCode="1" routeTitle="N-Judah" stopTitle="Civic Center StationOutbound">
+        <direction title="Outbound toward Ocean Beach">
+            <prediction seconds="563" minutes="9" epochTime="1229637162309" isDeparture="false" dirTag="N__OB2" block="9703" />
+            <prediction seconds="1250" minutes="20" epochTime="1229638264817" isDeparture="false" dirTag="N__OB2" block="9702" />
+        </direction>
+        <direction title="Outbound to 34th Ave">
+            <prediction seconds="123" minutes="2" epochTime="1229637162309" isDeparture="true" dirTag="N__OB1" block="9708" />
+            <prediction seconds="621" minutes="10" epochTime="1229637162309" isDeparture="true" dirTag="N__OB1" block="9707" />
+        </direction>
+        <message text="No Muni metro service btwn Caltrain/Embarc. &amp; Castroafter 10pm Mon-Fri. Bus service provided." />
+    </predictions>
+</body>
