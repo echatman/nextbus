@@ -1,0 +1,24 @@
+<!-- http://webservices.nextbus.com/service/publicXMLFeed?command=schedule&a=sf-muni&r=N -->
+<body>
+    <route tag="N" title="N-Judah" scheduleClass="2011JANUARY" serviceClass="wkd" direction="Inbound">
+        <header>
+            <stop tag="5225">Judah St and Sunset Blvd</stop>
+            <stop tag="5200">Judah St and 19th Ave</stop>
+            <stop tag="3913">Carl St and Hillway Ave</stop>
+            <!-- ... -->
+        </header>
+        <tr blockID="9721">
+            <stop tag="5225" epochTime="540000">00:09:00</stop>
+            <stop tag="5200" epochTime="840000">00:14:00</stop>
+            <stop tag="3913" epochTime="1440000">00:24:00</stop>
+            <!-- ... -->
+        </tr>
+        <tr blockID="9703">
+            <stop tag="5225" epochTime="1680000">00:28:00</stop>
+            <stop tag="5200" epochTime="1980000">00:33:00</stop>
+            <stop tag="3913" epochTime="2460000">00:41:00</stop>
+            <!-- ... -->
+        </tr>
+        <!-- ... -->
+    </route>
+</body>

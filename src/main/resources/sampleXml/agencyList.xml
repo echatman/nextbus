@@ -1,0 +1,11 @@
+<!-- http://webservices.nextbus.com/service/publicXMLFeed?command=agencyList -->
+<body>
+    <agency tag="actransit" title="AC Transit, CA" regionTitle="California-Northern" />
+    <agency tag="alexandria" title="Alexandria DASH, VA" shortTitle="DASH" regionTitle="Virginia" />
+    <agency tag="amerimar" title="Amerimar" regionTitle="Pennsylvania" />
+    <agency tag="blackhawk" title="Black Hawk Transportation Authority, CO" shortTitle="Black Hawk" regionTitle="Colorado" />
+    <agency tag="camarillo" title="Camarillo Area (CAT), CA" shortTitle="Camarillo (CAT)" regionTitle="California-Southern" />
+    <agency tag="case-western" title="Case Western University, OH" shortTitle="Case Western" regionTitle="Ohio" />
+    <agency tag="chapel-hill" title="Chapel Hill Transit, NC" shortTitle="Chapel Hill" regionTitle="North Carolina" />
+    <!-- ... -->
+</body>

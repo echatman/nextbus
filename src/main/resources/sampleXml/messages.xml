@@ -1,0 +1,27 @@
+<!-- http://webservices.nextbus.com/service/publicXMLFeed?command=messages&a=<agency tag>&r=<route tag1>&r=<route tagN> -->
+<body>
+    <route tag="all">
+        <message id="1700" creator="supervisor" sendToBuses="true" startBoundary="1253232780000" startBoundaryStr="Thu 17:13:00 PDT 2009"
+            endBoundary="1253233200000" endBoundaryStr="Thu Sep 17:20:00 PDT 2009">
+            <interval startDay="2" startTime="75600" endDay="4" endTime="79200" />
+            <interval startDay="4" startTime="75600" endDay="4" endTime="79200" />
+            <text>Thanks for taking transit</text>
+            <textSecondaryLanguage>Thanks for taking transit, in Spanish</textSecondaryLanguage>
+            <phonemeText>Thanks for taking traansit</phonemeText>
+        </message>
+    </route>
+    <route tag="bshop">
+        <message id="1701" creator="supervisor" startBoundary="1253232780000" startBoundaryStr="Thu 17:13:00 PDT 2009" endBoundary="1253233200000"
+            endBoundaryStr="Thu Sep 17:20:00 PDT 2009">
+            <routeConfiguredForMessage tag="bshop">
+                <stop tag="1324" title="7th&Main" />
+                <stop tag="1325" title="9th&Main" />
+            </routeConfiguredForMessage>
+            <routeForMessage tag="franklin" />
+            <text>Detour on Malou St on Thursday</text>
+            <phonemeText>Detour on Malooo St on Thursday</phonemeText>
+            <smsText>Detour on Malou on Thursday</smsText>
+            <priority>3</priority>
+        </message>
+    </route>
+</body>

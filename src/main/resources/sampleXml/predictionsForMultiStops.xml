@@ -1,0 +1,18 @@
+<!-- http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=N|6997&stops=N|3909 -->
+<body>
+    <direction title="Outbound toward Ocean Beach">
+        <predictions stopTitle="Civic Center Station Outbound" routeCode="1" routeTitle="N - Judah">
+            <prediction seconds="218" minutes="3" epochTime="1229637162309" isDeparture="false" />
+            <prediction seconds="976" minutes="16" epochTime="122963716923" isDeparture="false" />
+        </predictions>
+    </direction>
+    <direction title="Outbound toward Ocean Beach">
+        <predictions stopTitle="Carl St and Cole St" routeCode="1" routeTitle="N - Judah">
+            <prediction seconds="763" minutes="12" epochTime="1229637123422" isDeparture="false" />
+            <prediction seconds="1281" minutes="21" epochTime="1229637168293" isDeparture="false" />
+            <prediction seconds="1521" minutes="25" epochTime="1229637302334" isDeparture="false" />
+            <prediction seconds="2027" minutes="33" epochTime="1229637430203" isDeparture="false" />
+            <prediction seconds="2747" minutes="45" epochTime="1229637502034" isDeparture="false" />
+        </predictions>
+    </direction>
+</body>

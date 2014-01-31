@@ -7,17 +7,19 @@ import javax.xml.bind.annotation.XmlValue;
 
 /**
  * <h1>Error Messages</h1>
- * <p>Commands can return an Error XML object if there is some type
- * of problem such as the system has not been initialized yet or bad parameters
- * were used in the URL. When an Error XML object is returned, it has an
- * attribute called shouldRetry. If the error was returned only because the
- * server was initializing, then shouldRetry will be set to true. For this case
- * the application should try the URL again after waiting 10 seconds. If
- * shouldRetry attribute is set to false though, that means that there is an
- * error due to the URL and simply retrying the URL again will not fix the
- * problem.
+ * <p>
+ * Commands can return an Error XML object if there is some type of problem such
+ * as the system has not been initialized yet or bad parameters were used in the
+ * URL. When an Error XML object is returned, it has an attribute called
+ * shouldRetry. If the error was returned only because the server was
+ * initializing, then shouldRetry will be set to true. For this case the
+ * application should try the URL again after waiting 10 seconds. If shouldRetry
+ * attribute is set to false though, that means that there is an error due to
+ * the URL and simply retrying the URL again will not fix the problem.
  * 
- * <p>An error message looks like:
+ * <p>
+ * An error message looks like:
+ * 
  * <pre>
  * &lt;body>
  *     &lt;Error shouldRetry="true">
@@ -31,7 +33,7 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * @author echatman
  */
-@XmlType(name = "Error")
+@XmlType
 public class Error {
     @XmlAttribute
     Boolean shouldRetry;
