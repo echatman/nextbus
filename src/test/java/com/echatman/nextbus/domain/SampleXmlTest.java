@@ -28,6 +28,7 @@ public class SampleXmlTest {
                 { PredictionsBody.class, "predictions.xml" },
                 { Schedule.class, "schedule.xml" },
                 { Messages.class, "messages.xml" },
+                { VehicleLocations.class, "vehicleLocations.xml" },
         });
     }
 
