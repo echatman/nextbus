@@ -11,8 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * <h1>Command "agencyList"</h1>
  * <p>
- * To obtain a list of available agencies the following
- * command should be used:
+ * To obtain a list of available agencies the following command should be used:
  * <p>
  * <a href=
  * "http://webservices.nextbus.com/service/publicXMLFeed?command=agencyList"
@@ -22,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * provided only if it is different than the standard title element. If no
  * shortTitle element is provided, simply use the standard title element):
  * <p>
+ * 
  * <pre>
  * {@code
  * <body>
@@ -46,25 +46,80 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class AgencyList {
 
+    private List<Agency> agencies;
+    private Error error;
+
     @XmlElement(name = "agency")
-    List<Agency> agencies;
+    public List<Agency> getAgencies() {
+        return agencies;
+    }
+
     @XmlElement(name = "Error")
-    Error error;
+    public Error getError() {
+        return error;
+    }
+
+    @SuppressWarnings("unused")
+    private void setAgencies(List<Agency> agencies) {
+        this.agencies = agencies;
+    }
+
+    @SuppressWarnings("unused")
+    private void setError(Error error) {
+        this.error = error;
+    }
 
     @XmlType
     public static class Agency {
+
+        private String regionTitle;
+        private String shortTitle;
+        private String tag;
+        private String title;
+
         @XmlAttribute
-        String tag;
-        @XmlAttribute
-        String title;
+        public String getRegionTitle() {
+            return regionTitle;
+        }
+
         /**
          * The shortTitle element is provided only if it is different than the
          * standard title element. If no shortTitle element is provided, simply
          * use the standard title element
          */
         @XmlAttribute
-        String shortTitle;
+        public String getShortTitle() {
+            return shortTitle;
+        }
+
         @XmlAttribute
-        String regionTitle;
+        public String getTag() {
+            return tag;
+        }
+
+        @XmlAttribute
+        public String getTitle() {
+            return title;
+        }
+
+        @SuppressWarnings("unused")
+        private void setRegionTitle(String regionTitle) {
+            this.regionTitle = regionTitle;
+        }
+
+        @SuppressWarnings("unused")
+        private void setShortTitle(String shortTitle) {
+            this.shortTitle = shortTitle;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTitle(String title) {
+            this.title = title;
+        }
     }
 }

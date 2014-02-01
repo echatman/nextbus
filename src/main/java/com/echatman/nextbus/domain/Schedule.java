@@ -139,55 +139,203 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType
 public class Schedule {
 
-    @XmlElement(name = "route")
-    List<Route> routes;
+    private Error error;
+    private List<Route> routes;
+
     @XmlElement(name = "Error")
-    Error error;
+    public Error getError() {
+        return error;
+    }
+
+    @XmlElement(name = "route")
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    @SuppressWarnings("unused")
+    private void setError(Error error) {
+        this.error = error;
+    }
+
+    @SuppressWarnings("unused")
+    private void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
 
     @XmlType
     public static class Route {
-        @XmlAttribute
-        String tag;
-        @XmlAttribute
-        String title;
-        @XmlAttribute
-        String scheduleClass;
-        @XmlAttribute
-        String serviceClass;
-        @XmlAttribute
-        String direction;
-        @XmlElementWrapper(name = "header")
-        @XmlElement(name = "stop")
-        List<StopTitle> header;
-        @XmlElement(name = "tr")
-        List<TableRow> row;
 
-        @XmlType
-        public static class StopTitle {
-            @XmlAttribute
-            @XmlID
-            String tag;
-            @XmlValue
-            String title;
+        private String direction;
+        private List<StopTitle> header;
+        private List<TableRow> row;
+        private String scheduleClass;
+        private String serviceClass;
+        private String tag;
+        private String title;
+
+        @XmlAttribute
+        public String getDirection() {
+            return direction;
         }
 
-        @XmlType
-        public static class TableRow {
-            @XmlAttribute
-            String blockID;
-            @XmlElement(name = "stop")
-            List<Stop> stops;
+        @XmlElementWrapper(name = "header")
+        @XmlElement(name = "stop")
+        public List<StopTitle> getHeader() {
+            return header;
+        }
+
+        @XmlElement(name = "tr")
+        public List<TableRow> getRow() {
+            return row;
+        }
+
+        @XmlAttribute
+        public String getScheduleClass() {
+            return scheduleClass;
+        }
+
+        @XmlAttribute
+        public String getServiceClass() {
+            return serviceClass;
+        }
+
+        @XmlAttribute
+        public String getTag() {
+            return tag;
+        }
+
+        @XmlAttribute
+        public String getTitle() {
+            return title;
+        }
+
+        @SuppressWarnings("unused")
+        private void setDirection(String direction) {
+            this.direction = direction;
+        }
+
+        @SuppressWarnings("unused")
+        private void setHeader(List<StopTitle> header) {
+            this.header = header;
+        }
+
+        @SuppressWarnings("unused")
+        private void setRow(List<TableRow> row) {
+            this.row = row;
+        }
+
+        @SuppressWarnings("unused")
+        private void setScheduleClass(String scheduleClass) {
+            this.scheduleClass = scheduleClass;
+        }
+
+        @SuppressWarnings("unused")
+        private void setServiceClass(String serviceClass) {
+            this.serviceClass = serviceClass;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTitle(String title) {
+            this.title = title;
         }
 
         @XmlType
         public static class Stop {
-            @XmlAttribute(name="tag")
-            @XmlIDREF
-            StopTitle title;
+
+            private Long epochTime;
+            private String time;
+            private StopTitle title;
+
             @XmlAttribute
-            Long epochTime;
+            public Long getEpochTime() {
+                return epochTime;
+            }
+
             @XmlValue
-            String time;
+            public String getTime() {
+                return time;
+            }
+
+            @XmlAttribute(name = "tag")
+            @XmlIDREF
+            public StopTitle getTitle() {
+                return title;
+            }
+
+            @SuppressWarnings("unused")
+            private void setEpochTime(Long epochTime) {
+                this.epochTime = epochTime;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTime(String time) {
+                this.time = time;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTitle(StopTitle title) {
+                this.title = title;
+            }
+        }
+
+        @XmlType
+        public static class StopTitle {
+
+            private String tag;
+            private String title;
+
+            @XmlAttribute
+            @XmlID
+            public String getTag() {
+                return tag;
+            }
+
+            @XmlValue
+            public String getTitle() {
+                return title;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTitle(String title) {
+                this.title = title;
+            }
+        }
+
+        @XmlType
+        public static class TableRow {
+
+            private String blockID;
+            private List<Stop> stops;
+
+            @XmlAttribute
+            public String getBlockID() {
+                return blockID;
+            }
+
+            @XmlElement(name = "stop")
+            public List<Stop> getStops() {
+                return stops;
+            }
+
+            @SuppressWarnings("unused")
+            private void setBlockID(String blockID) {
+                this.blockID = blockID;
+            }
+
+            @SuppressWarnings("unused")
+            private void setStops(List<Stop> stops) {
+                this.stops = stops;
+            }
         }
     }
 }

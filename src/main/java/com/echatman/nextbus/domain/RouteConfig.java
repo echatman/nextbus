@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * <p>
  * The route data returned includes lists of stops, lists of directions, and
  * lists of paths. Configurations can be complicated, with multiple directions
- * having different sets of stops. Therefore one cannot expect the data to
+ * having different setS of stops. Therefore one cannot expect the data to
  * contain just two simple directions for a route. The stops are provided to
  * show the details, such as the titles for the stops, lat/lon, and also a
  * numeric stop ID. If you are creating a map then you simply display all of the
@@ -196,75 +196,105 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class RouteConfig {
 
-    @XmlElement(name = "route")
-    List<Route> routes;
+    private Error error;
+    private List<Route> routes;
+
     @XmlElement(name = "Error")
-    Error error;
+    public Error getError() {
+        return error;
+    }
+
+    @XmlElement(name = "route")
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    @SuppressWarnings("unused")
+    private void setError(Error error) {
+        this.error = error;
+    }
+
+    @SuppressWarnings("unused")
+    private void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
 
     @XmlType
     public static class Route {
-        /**
-         * unique alphanumeric identifier for route, such as “N”.
-         */
-        @XmlAttribute
-        String tag;
 
-        /**
-         * the name of the route to be displayed in a User Interface, such as “N
-         * - Judah”.
-         */
-        @XmlAttribute
-        String title;
-        /**
-         * for some transit agencies shorter titles are provided that can be
-         * useful for User Interfaces where there is not much screen real
-         * estate, such as on smartphones. This element is only provided where a
-         * short title is actually available. If a short title is not available
-         * then the regular title element should be used.
-         */
-        @XmlAttribute
-        String shortTitle;
+        private String color;
+        private List<Direction> directions;
+        private BigDecimal latMax;
+        private BigDecimal latMin;
+        private BigDecimal lonMax;
+        private BigDecimal lonMin;
+        private String oppositeColor;
+        private List<Path> paths;
+        private String shortTitle;
+        private List<Stop> stops;
+        private String tag;
+        private String title;
+
         /**
          * the color in hexadecimal format associated with the route. Useful for
          * User Interfaces such as maps.
          */
         @XmlAttribute
-        String color;
+        public String getColor() {
+            return color;
+        }
+
+        @XmlElement(name = "direction")
+        public List<Direction> getDirections() {
+            return directions;
+        }
+
+        /**
+         * latMin , latMax , lonMin , lonMax – specifies the extent of the
+         * route.
+         */
+        @XmlAttribute
+        public BigDecimal getLatMax() {
+            return latMax;
+        }
+
+        /**
+         * latMin , latMax , lonMin , lonMax – specifies the extent of the
+         * route.
+         */
+        @XmlAttribute
+        public BigDecimal getLatMin() {
+            return latMin;
+        }
+
+        /**
+         * latMin , latMax , lonMin , lonMax – specifies the extent of the
+         * route.
+         */
+        @XmlAttribute
+        public BigDecimal getLonMax() {
+            return lonMax;
+        }
+
+        /**
+         * latMin , latMax , lonMin , lonMax – specifies the extent of the
+         * route.
+         */
+        @XmlAttribute
+        public BigDecimal getLonMin() {
+            return lonMin;
+        }
+
         /**
          * the color that most contrasts with the route color. Specified in
          * hexadecimal format. Useful for User Interfaces such as maps. Will be
          * either black or white.
          */
         @XmlAttribute
-        String oppositeColor;
-        /**
-         * latMin , latMax , lonMin , lonMax – specifies the extent of the
-         * route.
-         */
-        @XmlAttribute
-        BigDecimal latMin;
-        /**
-         * latMin , latMax , lonMin , lonMax – specifies the extent of the
-         * route.
-         */
-        @XmlAttribute
-        BigDecimal latMax;
-        /**
-         * latMin , latMax , lonMin , lonMax – specifies the extent of the
-         * route.
-         */
-        @XmlAttribute
-        BigDecimal lonMin;
-        /**
-         * latMin , latMax , lonMin , lonMax – specifies the extent of the
-         * route.
-         */
-        @XmlAttribute
-        BigDecimal lonMax;
-        @XmlElement(name = "stop")
-        List<Stop> stops;
-        @XmlElement(name = "direction")
-        List<Direction> directions;
+        public String getOppositeColor() {
+            return oppositeColor;
+        }
+
         /**
          * The paths are simply lists of coordinates that can be used to draw a
          * route on a map. The path data can be voluminous. If you do not need
@@ -279,10 +309,298 @@ public class RouteConfig {
          * though.
          */
         @XmlElement(name = "path")
-        List<Path> paths;
+        public List<Path> getPaths() {
+            return paths;
+        }
+
+        /**
+         * for some transit agencies shorter titles are provided that can be
+         * useful for User Interfaces where there is not much screen real
+         * estate, such as on smartphones. This element is only provided where a
+         * short title is actually available. If a short title is not available
+         * then the regular title element should be used.
+         */
+        @XmlAttribute
+        public String getShortTitle() {
+            return shortTitle;
+        }
+
+        @XmlElement(name = "stop")
+        public List<Stop> getStops() {
+            return stops;
+        }
+
+        /**
+         * unique alphanumeric identifier for route, such as “N”.
+         */
+        @XmlAttribute
+        public String getTag() {
+            return tag;
+        }
+
+        /**
+         * the name of the route to be displayed in a User Interface, such as “N
+         * - Judah”.
+         */
+        @XmlAttribute
+        public String getTitle() {
+            return title;
+        }
+
+        @SuppressWarnings("unused")
+        private void setColor(String color) {
+            this.color = color;
+        }
+
+        @SuppressWarnings("unused")
+        private void setDirections(List<Direction> directions) {
+            this.directions = directions;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLatMax(BigDecimal latMax) {
+            this.latMax = latMax;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLatMin(BigDecimal latMin) {
+            this.latMin = latMin;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLonMax(BigDecimal lonMax) {
+            this.lonMax = lonMax;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLonMin(BigDecimal lonMin) {
+            this.lonMin = lonMin;
+        }
+
+        @SuppressWarnings("unused")
+        private void setOppositeColor(String oppositeColor) {
+            this.oppositeColor = oppositeColor;
+        }
+
+        @SuppressWarnings("unused")
+        private void setPaths(List<Path> paths) {
+            this.paths = paths;
+        }
+
+        @SuppressWarnings("unused")
+        private void setShortTitle(String shortTitle) {
+            this.shortTitle = shortTitle;
+        }
+
+        @SuppressWarnings("unused")
+        private void setStops(List<Stop> stops) {
+            this.stops = stops;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTitle(String title) {
+            this.title = title;
+        }
+
+        @XmlType
+        public static class Direction {
+
+            private String name;
+            private List<StopRef> stops;
+            private String tag;
+            private String title;
+            private Boolean useForUI;
+
+            /**
+             * a simplified name so that directions can be grouped together. If
+             * there are several Inbound directions for example then they can
+             * all be grouped together because they will all have the same name
+             * “Inbound”. This element is not available for all transit
+             * agencies.
+             */
+            @XmlAttribute
+            public String getName() {
+                return name;
+            }
+
+            /**
+             * within the direction there is a list of stops in order. This are
+             * useful for creating a User Interface where the user selects a
+             * route, direction, and then stop in order to obtain predictions.
+             */
+            @XmlElement(name = "stop")
+            public List<StopRef> getStops() {
+                return stops;
+            }
+
+            /**
+             * unique alphanumeric identifier for the direction.
+             */
+            @XmlAttribute
+            public String getTag() {
+                return tag;
+            }
+
+            /**
+             * the name of the direction to be displayed in the User Interface,
+             * such as “Inbound to Caltrain Station”.
+             */
+            @XmlAttribute
+            public String getTitle() {
+                return title;
+            }
+
+            /**
+             * If the direction is important enough to be listed to a passenger
+             * then the “useForUI” element will be set to true. The other
+             * directions typically do not need to be shown and are therefore
+             * not provided by default. If you need the other non - useForUI
+             * directions then you need to add “&verbose” to the URL.
+             */
+            @XmlAttribute
+            public Boolean getUseForUI() {
+                return useForUI;
+            }
+
+            @SuppressWarnings("unused")
+            private void setName(String name) {
+                this.name = name;
+            }
+
+            @SuppressWarnings("unused")
+            private void setStops(List<StopRef> stops) {
+                this.stops = stops;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTitle(String title) {
+                this.title = title;
+            }
+
+            @SuppressWarnings("unused")
+            private void setUseForUI(Boolean useForUI) {
+                this.useForUI = useForUI;
+            }
+
+            @XmlType
+            public static class StopRef {
+
+                private Stop stop;
+
+                @XmlAttribute(name = "tag")
+                @XmlIDREF
+                public Stop getStop() {
+                    return stop;
+                }
+
+                @SuppressWarnings("unused")
+                private void setStop(Stop stop) {
+                    this.stop = stop;
+                }
+            }
+        }
+
+        @XmlType
+        public static class Path {
+
+            private List<Point> points;
+
+            @XmlElement(name = "point")
+            public List<Point> getPoints() {
+                return points;
+            }
+
+            @SuppressWarnings("unused")
+            private void setPoints(List<Point> points) {
+                this.points = points;
+            }
+
+            @XmlType
+            public static class Point {
+
+                private BigDecimal lat;
+                private BigDecimal lon;
+
+                @XmlAttribute
+                public BigDecimal getLat() {
+                    return lat;
+                }
+
+                @XmlAttribute
+                public BigDecimal getLon() {
+                    return lon;
+                }
+
+                @SuppressWarnings("unused")
+                private void setLat(BigDecimal lat) {
+                    this.lat = lat;
+                }
+
+                @SuppressWarnings("unused")
+                private void setLon(BigDecimal lon) {
+                    this.lon = lon;
+                }
+            }
+        }
 
         @XmlType
         public static class Stop {
+
+            private BigDecimal lat;
+            private BigDecimal lon;
+            private String shortTitle;
+            private Long stopId;
+            private String tag;
+            private String title;
+
+            /**
+             * lat/lon - specify the location of the stop.
+             */
+            @XmlAttribute
+            public BigDecimal getLat() {
+                return lat;
+            }
+
+            /**
+             * lat/lon - specify the location of the stop.
+             */
+            @XmlAttribute
+            public BigDecimal getLon() {
+                return lon;
+            }
+
+            /**
+             * some transit agencies define short version of the title that are
+             * useful for applications where screen real estate is limited. This
+             * element is only provided when a separate short title exists.
+             */
+            @XmlAttribute
+            public String getShortTitle() {
+                return shortTitle;
+            }
+
+            /**
+             * an optional numeric ID to identify a stop. Useful for telephone
+             * or SMS systems so that a user can simply enter the numeric ID to
+             * identify a stop instead of having to select a route, direction,
+             * and stop. Not all transit agencies have numeric IDs to identify a
+             * stop so this element will not always be available.
+             */
+            @XmlAttribute
+            public Long getStopId() {
+                return stopId;
+            }
+
             /**
              * unique alphanumeric identifier for stop, such as “cp_1321”. Even
              * if the stop tags appear to usually be numeric they can sometimes
@@ -301,99 +619,47 @@ public class RouteConfig {
              */
             @XmlAttribute
             @XmlID
-            String tag;
+            public String getTag() {
+                return tag;
+            }
+
             /**
              * the name of the stop to displayed in a User Interface, such as “5
              * th St & Main, City Hall”.
              */
             @XmlAttribute
-            String title;
-            /**
-             * some transit agencies define short version of the title that are
-             * useful for applications where screen real estate is limited. This
-             * element is only provided when a separate short title exists.
-             */
-            @XmlAttribute
-            String shortTitle;
-            /**
-             * lat/lon - specify the location of the stop.
-             */
-            @XmlAttribute
-            BigDecimal lat;
-            /**
-             * lat/lon - specify the location of the stop.
-             */
-            @XmlAttribute
-            BigDecimal lon;
-            /**
-             * an optional numeric ID to identify a stop. Useful for telephone
-             * or SMS systems so that a user can simply enter the numeric ID to
-             * identify a stop instead of having to select a route, direction,
-             * and stop. Not all transit agencies have numeric IDs to identify a
-             * stop so this element will not always be available.
-             */
-            @XmlAttribute
-            Long stopId;
-        }
-
-        @XmlType
-        public static class Direction {
-            /**
-             * unique alphanumeric identifier for the direction.
-             */
-            @XmlAttribute
-            String tag;
-            /**
-             * the name of the direction to be displayed in the User Interface,
-             * such as “Inbound to Caltrain Station”.
-             */
-            @XmlAttribute
-            String title;
-            /**
-             * a simplified name so that directions can be grouped together. If
-             * there are several Inbound directions for example then they can
-             * all be grouped together because they will all have the same name
-             * “Inbound”. This element is not available for all transit
-             * agencies.
-             */
-            @XmlAttribute
-            String name;
-            /**
-             * If the direction is important enough to be listed to a passenger
-             * then the “useForUI” element will be set to true. The other
-             * directions typically do not need to be shown and are therefore
-             * not provided by default. If you need the other non - useForUI
-             * directions then you need to add “&verbose” to the URL.
-             */
-            @XmlAttribute
-            Boolean useForUI;
-            /**
-             * within the direction there is a list of stops in order. This are
-             * useful for creating a User Interface where the user selects a
-             * route, direction, and then stop in order to obtain predictions.
-             */
-            @XmlElement(name = "stop")
-            List<StopRef> stops;
-
-            @XmlType
-            public static class StopRef {
-                @XmlAttribute(name = "tag")
-                @XmlIDREF
-                Stop stop;
+            public String getTitle() {
+                return title;
             }
-        }
 
-        @XmlType
-        public static class Path {
-            @XmlElement(name = "point")
-            List<Point> points;
+            @SuppressWarnings("unused")
+            private void setLat(BigDecimal lat) {
+                this.lat = lat;
+            }
 
-            @XmlType
-            public static class Point {
-                @XmlAttribute
-                BigDecimal lat;
-                @XmlAttribute
-                BigDecimal lon;
+            @SuppressWarnings("unused")
+            private void setLon(BigDecimal lon) {
+                this.lon = lon;
+            }
+
+            @SuppressWarnings("unused")
+            private void setShortTitle(String shortTitle) {
+                this.shortTitle = shortTitle;
+            }
+
+            @SuppressWarnings("unused")
+            private void setStopId(Long stopId) {
+                this.stopId = stopId;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTag(String tag) {
+                this.tag = tag;
+            }
+
+            @SuppressWarnings("unused")
+            private void setTitle(String title) {
+                this.title = title;
             }
         }
     }

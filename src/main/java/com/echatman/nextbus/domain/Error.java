@@ -35,8 +35,27 @@ import javax.xml.bind.annotation.XmlValue;
  */
 @XmlType
 public class Error {
-    @XmlAttribute
-    Boolean shouldRetry;
+
+    private String errorMessage;
+    private Boolean shouldRetry;
+
     @XmlValue
-    String errorMessage;
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    @XmlAttribute
+    public Boolean getShouldRetry() {
+        return shouldRetry;
+    }
+
+    @SuppressWarnings("unused")
+    private void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    @SuppressWarnings("unused")
+    private void setShouldRetry(Boolean shouldRetry) {
+        this.shouldRetry = shouldRetry;
+    }
 }

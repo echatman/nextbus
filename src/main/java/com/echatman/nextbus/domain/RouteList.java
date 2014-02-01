@@ -62,24 +62,36 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class RouteList {
 
-    @XmlElement(name = "route")
-    List<Route> routes;
+    private Error error;
+    private List<Route> routes;
+
     @XmlElement(name = "Error")
-    Error error;
+    public Error getError() {
+        return error;
+    }
+
+    @XmlElement(name = "route")
+    public List<Route> getRoutes() {
+        return routes;
+    }
+
+    @SuppressWarnings("unused")
+    private void setError(Error error) {
+        this.error = error;
+    }
+
+    @SuppressWarnings("unused")
+    private void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
 
     @XmlType
     public static class Route {
-        /**
-         * unique alphanumeric identifier for route, such as “N”.
-         */
-        @XmlAttribute
-        String tag;
-        /**
-         * the name of the route to be displayed in a User Interface, such as “N
-         * - Judah”.
-         */
-        @XmlAttribute
-        String title;
+
+        private String shortTitle;
+        private String tag;
+        private String title;
+
         /**
          * for some transit agencies shorter titles are provided that can be
          * useful for User Interfaces where there is not much screen real
@@ -88,6 +100,40 @@ public class RouteList {
          * then the regular title element should be used.
          */
         @XmlAttribute
-        String shortTitle;
+        public String getShortTitle() {
+            return shortTitle;
+        }
+
+        /**
+         * unique alphanumeric identifier for route, such as “N”.
+         */
+        @XmlAttribute
+        public String getTag() {
+            return tag;
+        }
+
+        /**
+         * the name of the route to be displayed in a User Interface, such as “N
+         * - Judah”.
+         */
+        @XmlAttribute
+        public String getTitle() {
+            return title;
+        }
+
+        @SuppressWarnings("unused")
+        private void setShortTitle(String shortTitle) {
+            this.shortTitle = shortTitle;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTag(String tag) {
+            this.tag = tag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTitle(String title) {
+            this.title = title;
+        }
     }
 }

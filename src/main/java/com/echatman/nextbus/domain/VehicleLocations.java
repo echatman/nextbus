@@ -91,26 +91,82 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class VehicleLocations {
 
-    @XmlElement(name = "vehicle")
-    List<Vehicle> vehicles;
-    @XmlElement
-    LastTime lastTime;
+    private Error error;
+    private LastTime lastTime;
+    private List<Vehicle> vehicles;
+
+    /**
+     * @return the error
+     */
     @XmlElement(name = "Error")
-    Error error;
+    public Error getError() {
+        return error;
+    }
+
+    /**
+     * @return the lastTime
+     */
+    @XmlElement
+    public LastTime getLastTime() {
+        return lastTime;
+    }
+
+    /**
+     * @return the vehicles
+     */
+    @XmlElement(name = "vehicle")
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    @SuppressWarnings("unused")
+    private void setError(Error error) {
+        this.error = error;
+    }
+
+    @SuppressWarnings("unused")
+    private void setLastTime(LastTime lastTime) {
+        this.lastTime = lastTime;
+    }
+
+    @SuppressWarnings("unused")
+    private void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    @XmlType
+    public static class LastTime {
+
+        private Long time;
+
+        /**
+         * (msec since 1970 epoch time) – Specifies time of the last update for
+         * the vehicle location data returned.
+         */
+        @XmlAttribute
+        public Long getTime() {
+            return time;
+        }
+
+        @SuppressWarnings("unused")
+        private void setTime(Long time) {
+            this.time = time;
+        }
+    }
 
     @XmlType
     public static class Vehicle {
-        /**
-         * Identifier of the vehicle. It is often but not always numeric.
-         */
-        @XmlAttribute
-        String id;
-        /**
-         * Specifies the ID of the route the vehicle is currently associated
-         * with.
-         */
-        @XmlAttribute
-        String routeTag;
+
+        private String dirTag;
+        private Short heading;
+        private String id;
+        private BigDecimal lat;
+        private BigDecimal lon;
+        private Boolean predictable;
+        private String routeTag;
+        private Integer secsSinceReport;
+        private Double speedKmHr;
+
         /**
          * Specifies the ID of the direction that the vehicle is currently on.
          * The direction ID is usually the same as a trip pattern ID, but is
@@ -120,50 +176,122 @@ public class VehicleLocations {
          * within a block assignment.
          */
         @XmlAttribute
-        String dirTag;
-        /**
-         * specify the location of the vehicle.
-         */
-        @XmlAttribute
-        BigDecimal lat;
-        /**
-         * specify the location of the vehicle.
-         */
-        @XmlAttribute
-        BigDecimal lon;
-        /**
-         * How many seconds since the GPS location was actually recorded. It
-         * should be noted that sometimes a GPS report can be several minutes
-         * old.
-         */
-        @XmlAttribute
-        Integer secsSinceReport;
-        /**
-         * Specifies whether the vehicle is currently predictable.
-         */
-        @XmlAttribute
-        Boolean predictable;
+        public String getDirTag() {
+            return dirTag;
+        }
+
         /**
          * Specifies the heading of the vehicle in degrees. Will be a value
          * between 0 and 360. A negative value indicates that the heading is not
          * currently available.
          */
         @XmlAttribute
-        Short heading;
+        public Short getHeading() {
+            return heading;
+        }
+
+        /**
+         * Identifier of the vehicle. It is often but not always numeric.
+         */
+        @XmlAttribute
+        public String getId() {
+            return id;
+        }
+
+        /**
+         * specify the location of the vehicle.
+         */
+        @XmlAttribute
+        public BigDecimal getLat() {
+            return lat;
+        }
+
+        /**
+         * specify the location of the vehicle.
+         */
+        @XmlAttribute
+        public BigDecimal getLon() {
+            return lon;
+        }
+
+        /**
+         * Specifies whether the vehicle is currently predictable.
+         */
+        @XmlAttribute
+        public Boolean getPredictable() {
+            return predictable;
+        }
+
+        /**
+         * Specifies the ID of the route the vehicle is currently associated
+         * with.
+         */
+        @XmlAttribute
+        public String getRouteTag() {
+            return routeTag;
+        }
+
+        /**
+         * How many seconds since the GPS location was actually recorded. It
+         * should be noted that sometimes a GPS report can be several minutes
+         * old.
+         */
+        @XmlAttribute
+        public Integer getSecsSinceReport() {
+            return secsSinceReport;
+        }
+
         /**
          * Specifies GPS based speed of vehicle.
          */
         @XmlAttribute
-        Double speedKmHr;
-    }
+        public Double getSpeedKmHr() {
+            return speedKmHr;
+        }
 
-    @XmlType
-    public static class LastTime {
-        /**
-         * (msec since 1970 epoch time) – Specifies time of the last update for
-         * the vehicle location data returned.
-         */
-        @XmlAttribute
-        Long time;
+        @SuppressWarnings("unused")
+        private void setDirTag(String dirTag) {
+            this.dirTag = dirTag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setHeading(Short heading) {
+            this.heading = heading;
+        }
+
+        @SuppressWarnings("unused")
+        private void setId(String id) {
+            this.id = id;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLat(BigDecimal lat) {
+            this.lat = lat;
+        }
+
+        @SuppressWarnings("unused")
+        private void setLon(BigDecimal lon) {
+            this.lon = lon;
+        }
+
+        @SuppressWarnings("unused")
+        private void setPredictable(Boolean predictable) {
+            this.predictable = predictable;
+        }
+
+        @SuppressWarnings("unused")
+        private void setRouteTag(String routeTag) {
+            this.routeTag = routeTag;
+        }
+
+        @SuppressWarnings("unused")
+        private void setSecsSinceReport(Integer secsSinceReport) {
+            this.secsSinceReport = secsSinceReport;
+        }
+
+        @SuppressWarnings("unused")
+        private void setSpeedKmHr(Double speedKmHr) {
+            this.speedKmHr = speedKmHr;
+        }
     }
 }
