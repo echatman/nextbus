@@ -26,6 +26,7 @@ public class SampleXmlTest {
                 { RouteList.class, "routeList.xml" },
                 { AgencyList.class, "agencyList.xml" },
                 { PredictionsBody.class, "predictions.xml" },
+                { PredictionsForMultiStops.class, "predictionsForMultiStops.xml" },
                 { Schedule.class, "schedule.xml" },
                 { Messages.class, "messages.xml" },
                 { VehicleLocations.class, "vehicleLocations.xml" },
