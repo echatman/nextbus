@@ -62,8 +62,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class RouteList {
 
+    private String copyright;
     private Error error;
     private List<Route> routes;
+
+    @XmlAttribute
+    public String getCopyright() {
+        return copyright;
+    }
 
     @XmlElement(name = "Error")
     public Error getError() {
@@ -73,6 +79,11 @@ public class RouteList {
     @XmlElement(name = "route")
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    @SuppressWarnings("unused")
+    private void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     @SuppressWarnings("unused")

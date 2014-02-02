@@ -91,9 +91,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class VehicleLocations {
 
+    private String copyright;
     private Error error;
     private LastTime lastTime;
     private List<Vehicle> vehicles;
+
+    @XmlAttribute
+    public String getCopyright() {
+        return copyright;
+    }
 
     /**
      * @return the error
@@ -117,6 +123,11 @@ public class VehicleLocations {
     @XmlElement(name = "vehicle")
     public List<Vehicle> getVehicles() {
         return vehicles;
+    }
+
+    @SuppressWarnings("unused")
+    private void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     @SuppressWarnings("unused")

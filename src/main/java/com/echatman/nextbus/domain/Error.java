@@ -58,4 +58,9 @@ public class Error {
     private void setShouldRetry(Boolean shouldRetry) {
         this.shouldRetry = shouldRetry;
     }
+
+    @Override
+    public String toString() {
+        return "Error [errorMessage=\"" + errorMessage + "\", shouldRetry=" + shouldRetry + "]";
+    }
 }

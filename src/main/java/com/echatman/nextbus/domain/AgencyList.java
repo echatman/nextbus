@@ -47,11 +47,17 @@ import javax.xml.bind.annotation.XmlType;
 public class AgencyList {
 
     private List<Agency> agencies;
+    private String copyright;
     private Error error;
 
     @XmlElement(name = "agency")
     public List<Agency> getAgencies() {
         return agencies;
+    }
+
+    @XmlAttribute
+    public String getCopyright() {
+        return copyright;
     }
 
     @XmlElement(name = "Error")
@@ -62,6 +68,11 @@ public class AgencyList {
     @SuppressWarnings("unused")
     private void setAgencies(List<Agency> agencies) {
         this.agencies = agencies;
+    }
+
+    @SuppressWarnings("unused")
+    private void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     @SuppressWarnings("unused")

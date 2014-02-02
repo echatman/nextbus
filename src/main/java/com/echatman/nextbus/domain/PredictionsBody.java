@@ -20,8 +20,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class PredictionsBody {
 
+    private String copyright;
     private Error error;
     private Predictions predictions;
+
+    @XmlAttribute
+    public String getCopyright() {
+        return copyright;
+    }
 
     @XmlElement(name = "Error")
     public Error getError() {
@@ -31,6 +37,11 @@ public class PredictionsBody {
     @XmlElement
     public Predictions getPredictions() {
         return predictions;
+    }
+
+    @SuppressWarnings("unused")
+    private void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 
     @SuppressWarnings("unused")
