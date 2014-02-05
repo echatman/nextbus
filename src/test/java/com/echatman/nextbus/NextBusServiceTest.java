@@ -1,6 +1,7 @@
 // (c) 2014 Coverity, Inc. All rights reserved worldwide.
 package com.echatman.nextbus;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.echatman.nextbus.domain.AgencyList;
@@ -21,10 +22,16 @@ public class NextBusServiceTest {
 
     String agencyTag = "sf-muni";
     String routeTag = "N";
+    NextBusService nextBusService;
+
+    @Before
+    public void setUp() {
+        nextBusService = new NextBusService();
+    }
 
     @Test
     public void testAgencyList() throws Exception {
-        AgencyList agencyList = NextBusService.agencyList();
+        AgencyList agencyList = nextBusService.agencyList();
         // Basic validation of result
         assertNotNull("Agency list should not return null", agencyList);
         assertNull("Agency list returned error", agencyList.getError());
@@ -34,12 +41,12 @@ public class NextBusServiceTest {
         assertNotNull("Agency list should not contain nulls", agency);
         assertNotNull("Agency title should not be null", agency.getTitle());
         // Compare XML
-        TestUtils.assertXmlMatches(NextBusService.buildAgencyListURI(), AgencyList.class, agencyList);
+        TestUtils.assertXmlMatches(nextBusService.buildAgencyListURI(), AgencyList.class, agencyList);
     }
 
     @Test
     public void testRouteList() throws Exception {
-        RouteList routeList = NextBusService.routeList(agencyTag);
+        RouteList routeList = nextBusService.routeList(agencyTag);
         // Basic validation of result
         assertNotNull("Route list should not return null", routeList);
         assertNull("Route list returned error", routeList.getError());
@@ -49,13 +56,13 @@ public class NextBusServiceTest {
         assertNotNull("Route list should not contain nulls", route);
         assertNotNull("Route title should not be null", route.getTitle());
         // Compare XML
-        TestUtils.assertXmlMatches(NextBusService.buildRouteListURI(agencyTag), RouteList.class, routeList);
+        TestUtils.assertXmlMatches(nextBusService.buildRouteListURI(agencyTag), RouteList.class, routeList);
     }
 
     @Test
     public void testRouteConfig_allRoutes() throws Exception {
         RouteConfigRequest request = RouteConfigRequest.forAllRoutes(agencyTag);
-        RouteConfig routeConfig = NextBusService.routeConfig(request);
+        RouteConfig routeConfig = nextBusService.routeConfig(request);
         // Basic validation of result
         assertNotNull("Route config should not return null", routeConfig);
         assertNull("Route config returned error", routeConfig.getError());
@@ -65,13 +72,13 @@ public class NextBusServiceTest {
         assertNotNull("Route config should not contain nulls", route);
         assertNotNull("Route title should not be null", route.getTitle());
         // Compare XML
-        TestUtils.assertXmlMatches(NextBusService.buildRouteConfigURI(request), RouteConfig.class, routeConfig);
+        TestUtils.assertXmlMatches(nextBusService.buildRouteConfigURI(request), RouteConfig.class, routeConfig);
     }
 
     @Test
     public void testRouteConfig_singleRoute() throws Exception {
         RouteConfigRequest request = RouteConfigRequest.forRoute(agencyTag, routeTag);
-        RouteConfig routeConfig = NextBusService.routeConfig(request);
+        RouteConfig routeConfig = nextBusService.routeConfig(request);
         // Basic validation of result
         assertNotNull("Route config should not return null", routeConfig);
         assertNull("Route config returned error", routeConfig.getError());
@@ -81,6 +88,6 @@ public class NextBusServiceTest {
         assertNotNull("Route config should not contain nulls", route);
         assertNotNull("Route title should not be null", route.getTitle());
         // Compare XML
-        TestUtils.assertXmlMatches(NextBusService.buildRouteConfigURI(request), RouteConfig.class, routeConfig);
+        TestUtils.assertXmlMatches(nextBusService.buildRouteConfigURI(request), RouteConfig.class, routeConfig);
     }
 }

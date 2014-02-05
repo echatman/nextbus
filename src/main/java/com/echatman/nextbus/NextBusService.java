@@ -31,7 +31,7 @@ import com.echatman.nextbus.request.RouteConfigRequest;
  * 
  * @author echatman
  */
-public abstract class NextBusService {
+public class NextBusService {
 
     public static final String BASE_URL = "http://webservices.nextbus.com/service/publicXMLFeed";
 
@@ -42,7 +42,7 @@ public abstract class NextBusService {
      * @throws IOException
      * @throws ClientProtocolException
      */
-    public static AgencyList agencyList() throws ClientProtocolException, IOException {
+    public AgencyList agencyList() throws ClientProtocolException, IOException {
         return executeRequest(buildAgencyListURI(), AgencyList.class);
     }
 
@@ -52,7 +52,7 @@ public abstract class NextBusService {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public static PredictionsBody predictions(PredictionsRequest request) throws ClientProtocolException, IOException {
+    public PredictionsBody predictions(PredictionsRequest request) throws ClientProtocolException, IOException {
         return executeRequest(buildPredictionsURI(request), PredictionsBody.class);
     }
 
@@ -63,7 +63,7 @@ public abstract class NextBusService {
      * @throws IOException
      * @throws ClientProtocolException
      */
-    public static RouteConfig routeConfig(RouteConfigRequest request) throws ClientProtocolException, IOException {
+    public RouteConfig routeConfig(RouteConfigRequest request) throws ClientProtocolException, IOException {
         return executeRequest(buildRouteConfigURI(request), RouteConfig.class);
     }
 
@@ -78,11 +78,11 @@ public abstract class NextBusService {
      * @throws IOException
      * @throws ClientProtocolException
      */
-    public static RouteList routeList(String agencyTag) throws ClientProtocolException, IOException {
+    public RouteList routeList(String agencyTag) throws ClientProtocolException, IOException {
         return executeRequest(buildRouteListURI(agencyTag), RouteList.class);
     }
 
-    private static <T> T executeRequest(URI uri, Class<T> returnType) throws IOException, ClientProtocolException {
+    private <T> T executeRequest(URI uri, Class<T> returnType) throws IOException, ClientProtocolException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(uri);
         CloseableHttpResponse response = httpclient.execute(httpGet);
@@ -102,7 +102,7 @@ public abstract class NextBusService {
         }
     }
 
-    private static URI toURI(URIBuilder uriBuilder) {
+    private URI toURI(URIBuilder uriBuilder) {
         try {
             return uriBuilder.build();
         } catch (URISyntaxException e) {
@@ -112,7 +112,7 @@ public abstract class NextBusService {
         }
     }
 
-    private static URIBuilder uriBuilder() {
+    private URIBuilder uriBuilder() {
         try {
             return new URIBuilder(BASE_URL);
         } catch (URISyntaxException e) {
@@ -121,11 +121,11 @@ public abstract class NextBusService {
         }
     }
 
-    static URI buildAgencyListURI() {
+    URI buildAgencyListURI() {
         return toURI(uriBuilder().setParameter("command", "agencyList"));
     }
 
-    static URI buildPredictionsURI(PredictionsRequest request) {
+    URI buildPredictionsURI(PredictionsRequest request) {
         URIBuilder uriBuilder = uriBuilder();
         uriBuilder.setParameter("command", "predictions");
         uriBuilder.setParameter("a", request.getAgencyTag());
@@ -144,7 +144,7 @@ public abstract class NextBusService {
         return toURI(uriBuilder);
     }
 
-    static URI buildRouteConfigURI(RouteConfigRequest request) {
+    URI buildRouteConfigURI(RouteConfigRequest request) {
         URIBuilder uriBuilder = uriBuilder();
         uriBuilder.setParameter("command", "routeConfig");
         uriBuilder.setParameter("a", request.getAgencyTag());
@@ -160,7 +160,7 @@ public abstract class NextBusService {
         return toURI(uriBuilder);
     }
 
-    static URI buildRouteListURI(String agencyTag) {
+    URI buildRouteListURI(String agencyTag) {
         return toURI(uriBuilder().setParameter("command", "routeList").setParameter("a", agencyTag));
     }
 }
