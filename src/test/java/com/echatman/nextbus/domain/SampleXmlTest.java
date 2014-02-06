@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import static com.echatman.nextbus.test.TestUtils.testSampleXml;
+import com.echatman.nextbus.test.TestUtils;
 
 /**
  *
@@ -40,12 +40,12 @@ public class SampleXmlTest {
 
     @Test
     public void testNormal() throws Exception {
-        testSampleXml(xmlRootElementClass, xmlFileName);
+        TestUtils.testMarshalling(xmlRootElementClass, TestUtils.getFileContentsAsString("/sampleXml/"+xmlFileName));
     }
 
     @Test
     public void testError() throws Exception {
-        testSampleXml(xmlRootElementClass, "error.xml");
+        TestUtils.testMarshalling(xmlRootElementClass, TestUtils.getFileContentsAsString("/sampleXml/error.xml"));
     }
 
 }

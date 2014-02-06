@@ -37,17 +37,16 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestUtils {
 
-    public static <T> T testSampleXml(Class<T> clazz, String xmlFile) throws JAXBException, IOException, SAXException {
-        String expected = getSampleXml(xmlFile);
-        T object = unmarshal(clazz, new StreamSource(new StringReader(expected)));
-        String actual = marshal(clazz, object);
-        assertXmlMatches(expected, actual);
+    public static <T> T testMarshalling(Class<T> clazz, String expectedXml) throws JAXBException, IOException, SAXException {
+        T object = unmarshal(clazz, new StreamSource(new StringReader(expectedXml)));
+        String actualXml = marshal(clazz, object);
+        assertXmlMatches(expectedXml, actualXml);
         return object;
     }
 
     public static <T> void assertXmlMatches(URI uri, Class<T> clazz, T object) throws IOException, SAXException,
             PropertyException, JAXBException {
-        String expected = TestUtils.getXml(uri);
+        String expected = TestUtils.getURIContentsAsString(uri);
         String actual = TestUtils.marshal(clazz, object);
         assertXmlMatches(expected, actual);
     }
@@ -78,13 +77,13 @@ public class TestUtils {
         return object;
     }
 
-    public static String getSampleXml(String xmlFile) throws IOException {
-        InputStream stream = TestUtils.class.getResourceAsStream("/sampleXml/" + xmlFile);
+    public static String getFileContentsAsString(String filename) throws IOException {
+        InputStream stream = TestUtils.class.getResourceAsStream(filename);
         assertNotNull(stream);
         return IOUtils.toString(stream);
     }
 
-    public static String getXml(URI uri) throws IOException {
+    public static String getURIContentsAsString(URI uri) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(uri);
         CloseableHttpResponse response = httpclient.execute(httpGet);
