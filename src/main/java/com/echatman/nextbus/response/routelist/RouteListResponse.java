@@ -1,12 +1,11 @@
 // (c) 2014 Coverity, Inc. All rights reserved worldwide.
-package com.echatman.nextbus.domain;
+package com.echatman.nextbus.response.routelist;
 
-import java.util.List;
+import com.echatman.nextbus.response.NextBusResponse;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
  * <h1>Command "routeList"</h1>
@@ -58,23 +57,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * @author echatman
  */
-@XmlRootElement(name = "body")
 @XmlType
-public class RouteList {
+public class RouteListResponse extends NextBusResponse {
 
-    private String copyright;
-    private Error error;
     private List<Route> routes;
-
-    @XmlAttribute
-    public String getCopyright() {
-        return copyright;
-    }
-
-    @XmlElement(name = "Error")
-    public Error getError() {
-        return error;
-    }
 
     @XmlElement(name = "route")
     public List<Route> getRoutes() {
@@ -82,69 +68,8 @@ public class RouteList {
     }
 
     @SuppressWarnings("unused")
-    private void setCopyright(String copyright) {
-        this.copyright = copyright;
-    }
-
-    @SuppressWarnings("unused")
-    private void setError(Error error) {
-        this.error = error;
-    }
-
-    @SuppressWarnings("unused")
     private void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
 
-    @XmlType
-    public static class Route {
-
-        private String shortTitle;
-        private String tag;
-        private String title;
-
-        /**
-         * for some transit agencies shorter titles are provided that can be
-         * useful for User Interfaces where there is not much screen real
-         * estate, such as on smartphones. This element is only provided where a
-         * short title is actually available. If a short title is not available
-         * then the regular title element should be used.
-         */
-        @XmlAttribute
-        public String getShortTitle() {
-            return shortTitle;
-        }
-
-        /**
-         * unique alphanumeric identifier for route, such as “N”.
-         */
-        @XmlAttribute
-        public String getTag() {
-            return tag;
-        }
-
-        /**
-         * the name of the route to be displayed in a User Interface, such as “N
-         * - Judah”.
-         */
-        @XmlAttribute
-        public String getTitle() {
-            return title;
-        }
-
-        @SuppressWarnings("unused")
-        private void setShortTitle(String shortTitle) {
-            this.shortTitle = shortTitle;
-        }
-
-        @SuppressWarnings("unused")
-        private void setTag(String tag) {
-            this.tag = tag;
-        }
-
-        @SuppressWarnings("unused")
-        private void setTitle(String title) {
-            this.title = title;
-        }
-    }
 }

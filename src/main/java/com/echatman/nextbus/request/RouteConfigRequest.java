@@ -15,7 +15,7 @@ public class RouteConfigRequest {
      * command should be used. Data for all routes for the agency is returned.
      * Due to the large size of the resulting XML the routeConfig command is
      * limited to providing data for only up to 100 routes per request. If an
-     * agency has more than 100 routes then multiple {@link #forRoute()}
+     * agency has more than 100 routes then multiple {@link #forRoute(String, String)}
      * requests would need to be used to read data for all routes.
      * 
      * @param agencyTag
@@ -33,14 +33,14 @@ public class RouteConfigRequest {
      * for the agency as obtained from the {@link NextBusService#agencyList()}
      * command should be used. The route is specified by the "r" parameter. The
      * tag for the route is obtained using the
-     * {@link NextBusService#routeList()} command.
+     * {@link NextBusService#routeList(String)} command.
      * 
      * @param agencyTag
      *            The tag for the agency as obtained from the
      *            {@link NextBusService#agencyList()} command
      * @param routeTag
      *            The tag for the route as obtained from the
-     *            {@link NextBusService#routeList()} command.
+     *            {@link NextBusService#routeList(String)} command.
      * @return RouteConfigRequest
      */
     public static RouteConfigRequest forRoute(String agencyTag, String routeTag) {

@@ -1,18 +1,25 @@
 <!-- http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=N|6997&stops=N|3909 -->
-<body>
-    <direction title="Outbound toward Ocean Beach">
-        <predictions stopTitle="Civic Center Station Outbound" routeCode="1" routeTitle="N - Judah">
-            <prediction seconds="218" minutes="3" epochTime="1229637162309" isDeparture="false" />
-            <prediction seconds="976" minutes="16" epochTime="122963716923" isDeparture="false" />
-        </predictions>
-    </direction>
-    <direction title="Outbound toward Ocean Beach">
-        <predictions stopTitle="Carl St and Cole St" routeCode="1" routeTitle="N - Judah">
-            <prediction seconds="763" minutes="12" epochTime="1229637123422" isDeparture="false" />
-            <prediction seconds="1281" minutes="21" epochTime="1229637168293" isDeparture="false" />
-            <prediction seconds="1521" minutes="25" epochTime="1229637302334" isDeparture="false" />
-            <prediction seconds="2027" minutes="33" epochTime="1229637430203" isDeparture="false" />
-            <prediction seconds="2747" minutes="45" epochTime="1229637502034" isDeparture="false" />
-        </predictions>
-    </direction>
+<body copyright="All data copyright San Francisco Muni 2015.">
+    <predictions agencyTitle="San Francisco Muni" routeTitle="N-Judah" routeTag="N" stopTitle="Civic Center Station Outbound" stopTag="6997">
+        <direction title="Outbound to Ocean Beach via Downtown">
+            <prediction epochTime="1432319632465" seconds="677" minutes="11" isDeparture="false" dirTag="N____O_F00" vehicle="1491" vehiclesInConsist="2" block="9704" tripTag="6641133" />
+            <prediction epochTime="1432319850669" seconds="895" minutes="14" isDeparture="false" dirTag="N____O_F00" vehicle="1470" vehiclesInConsist="2" block="9705" tripTag="6641134" />
+            <prediction epochTime="1432320595090" seconds="1640" minutes="27" isDeparture="false" affectedByLayover="true" dirTag="N____O_F00" vehicle="1431" vehiclesInConsist="2" block="9718" tripTag="6641135" />
+            <prediction epochTime="1432320959635" seconds="2004" minutes="33" isDeparture="false" affectedByLayover="true" dirTag="N____O_F00" vehicle="1477" vehiclesInConsist="2" block="9707" tripTag="6641136" />
+            <prediction epochTime="1432321559635" seconds="2604" minutes="43" isDeparture="false" affectedByLayover="true" dirTag="N____O_F00" vehicle="1450" vehiclesInConsist="2" block="9708" tripTag="6641137" />
+        </direction>
+        <message text="Go to sfmta.com 4 Email/Text Alerts." priority="Low"/>
+        <message text="We&apos;re on Twitter: @sfmta_muni" priority="Low"/>
+    </predictions>
+    <predictions agencyTitle="San Francisco Muni" routeTitle="N-Judah" routeTag="N" stopTitle="Carl St &amp; Cole St" stopTag="3909">
+        <direction title="Outbound to Ocean Beach via Downtown">
+            <prediction epochTime="1432319094140" seconds="139" minutes="2" isDeparture="false" dirTag="N____O_F00" vehicle="1452" vehiclesInConsist="2" block="9716" tripTag="6641132" />
+            <prediction epochTime="1432320246021" seconds="1291" minutes="21" isDeparture="false" dirTag="N____O_F00" vehicle="1491" vehiclesInConsist="2" block="9704" tripTag="6641133" />
+            <prediction epochTime="1432320464225" seconds="1509" minutes="25" isDeparture="false" dirTag="N____O_F00" vehicle="1470" vehiclesInConsist="2" block="9705" tripTag="6641134" />
+            <prediction epochTime="1432321208646" seconds="2253" minutes="37" isDeparture="false" affectedByLayover="true" dirTag="N____O_F00" vehicle="1431" vehiclesInConsist="2" block="9718" tripTag="6641135" />
+            <prediction epochTime="1432321573191" seconds="2618" minutes="43" isDeparture="false" affectedByLayover="true" dirTag="N____O_F00" vehicle="1477" vehiclesInConsist="2" block="9707" tripTag="6641136" />
+        </direction>
+        <message text="Go to sfmta.com 4 Email/Text Alerts." priority="Low"/>
+        <message text="We&apos;re on Twitter: @sfmta_muni" priority="Low"/>
+    </predictions>
 </body>

@@ -1,12 +1,12 @@
 // (c) 2014 Coverity, Inc. All rights reserved worldwide.
-package com.echatman.nextbus.domain;
+package com.echatman.nextbus.response;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
- * <h1>Error Messages</h1>
+ * <h1>Error MessagesResponse</h1>
  * <p>
  * Commands can return an Error XML object if there is some type of problem such
  * as the system has not been initialized yet or bad parameters were used in the

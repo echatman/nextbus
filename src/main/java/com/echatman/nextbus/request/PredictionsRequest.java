@@ -11,8 +11,8 @@ public class PredictionsRequest {
         return new PredictionsRequest().setAgencyTag(agencyTag).setStopId(stopId);
     }
 
-    public static PredictionsRequest forStopTagAndRouteTag(String agencyTag, String stopTag, String routeTag) {
-        return new PredictionsRequest().setAgencyTag(agencyTag).setStopTag(stopTag).setRouteTag(routeTag);
+    public static PredictionsRequest forRouteTagAndStopTag(String agencyTag, String routeTag, String stopTag) {
+        return new PredictionsRequest().setAgencyTag(agencyTag).setRouteTag(routeTag).setStopTag(stopTag);
     }
 
     private String agencyTag;
