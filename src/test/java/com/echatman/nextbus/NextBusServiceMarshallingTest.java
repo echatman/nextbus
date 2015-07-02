@@ -3,7 +3,6 @@ package com.echatman.nextbus;
 import com.echatman.nextbus.request.PredictionsForMultiStopsRequest;
 import com.echatman.nextbus.request.PredictionsRequest;
 import com.echatman.nextbus.request.RouteConfigRequest;
-import com.echatman.nextbus.response.agencylist.Agency;
 import com.echatman.nextbus.response.agencylist.AgencyListResponse;
 import com.echatman.nextbus.response.locations.VehicleLocationsResponse;
 import com.echatman.nextbus.response.messages.MessagesResponse;
@@ -27,7 +26,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.fail;
 
 /**
@@ -56,10 +54,10 @@ public class NextBusServiceMarshallingTest {
         if (agencies == null) {
             AgencyListResponse agenciesResponse = new NextBusService().agencyList();
             TestUtils.checkForErrors(agenciesResponse);
-            agencies = agenciesResponse.getAgencies().stream()
-                    .map(Agency::getTag)
-                    .limit(MAX_AGENCIES)
-                    .collect(toList());
+            agencies = new ArrayList<>();
+            for (int i = 0; i < agenciesResponse.getAgencies().size() && i < MAX_AGENCIES; i++) {
+                agencies.add(agenciesResponse.getAgencies().get(i).getTag());
+            }
             System.out.println("Found " + agencies.size() + " agencies");
         }
         return agencies;
@@ -71,9 +69,10 @@ public class NextBusServiceMarshallingTest {
             for (String agencyTag : getAgencies()) {
                 RouteListResponse routeList = new NextBusService().routeList(agencyTag);
                 TestUtils.checkForErrors(routeList);
-                List<String> routeTags = routeList.getRoutes().stream()
-                        .map(Route::getTag)
-                        .collect(toList());
+                List<String> routeTags = new ArrayList<>();
+                for (Route route : routeList.getRoutes()) {
+                    routeTags.add(route.getTag());
+                }
                 if (routeTags.isEmpty()) {
                     System.err.println("Warning: No routes found for agency " + agencyTag);
                 } else {
@@ -100,8 +99,10 @@ public class NextBusServiceMarshallingTest {
                     fail("No config found for route " + routeConfigResponse.getUrl());
                 }
                 RouteConfig routeConfig = routeConfigResponse.getRoutes().get(0);
-                List<String> stopTags = routeConfig.getStops().stream()
-                        .map(StopConfig::getTag).collect(toList());
+                List<String> stopTags = new ArrayList<>();
+                for (StopConfig stopConfig : routeConfig.getStops()) {
+                    stopTags.add(stopConfig.getTag());
+                }
                 if (stopTags.isEmpty()) {
                     System.err.println("Warning: no stops found for agency " + agencyTag + ", route " + routeTag);
                 } else {
@@ -135,7 +136,11 @@ public class NextBusServiceMarshallingTest {
 
         @Parameterized.Parameters(name="{index}: agency {0}")
         public static Collection<Object[]> data() throws Exception {
-            return getAgencies().stream().map(tag -> new String[]{tag}).collect(toList());
+            Collection<Object[]> result = new ArrayList<>();
+            for (String agencyTag : getAgencies()) {
+                result.add(new String[]{agencyTag});
+            }
+            return result;
         }
 
         @Parameterized.Parameter

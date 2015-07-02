@@ -25,8 +25,6 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.*;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -109,10 +107,8 @@ public class TestUtils {
             List<Node> controlChildren = controlChildrenArg;
             List<Node> testChildren = testChildrenArg;
             // Group child nodes by type and name
-            Map<Pair<Short,String>, List<Node>> groupedControlChildren = controlChildren.stream()
-                    .collect(groupingBy(node -> Pair.of(node.getNodeType(), node.getNodeName())));
-            Map<Pair<Short,String>, List<Node>> groupedTestChildren = testChildren.stream()
-                    .collect(groupingBy(node -> Pair.of(node.getNodeType(), node.getNodeName())));
+            Map<Pair<Short, String>, List<Node>> groupedControlChildren = getGroupedNodeChildren(controlChildren);
+            Map<Pair<Short, String>, List<Node>> groupedTestChildren = getGroupedNodeChildren(testChildren);
             Set<Pair<Short,String>> allKeys = new HashSet<>(groupedControlChildren.keySet());
             allKeys.addAll(groupedTestChildren.keySet());
             for (Pair<Short,String> key : allKeys) {
@@ -137,13 +133,28 @@ public class TestUtils {
 
             }
         }
+
+        private Map<Pair<Short, String>, List<Node>> getGroupedNodeChildren(List<Node> children) {
+            Map<Pair<Short,String>, List<Node>> result = new HashMap<>();
+            for (Node node : children) {
+                Pair<Short, String> key = Pair.of(node.getNodeType(), node.getNodeName());
+                if (!result.containsKey(key)) {
+                    result.put(key, new ArrayList<Node>());
+                }
+                result.get(key).add(node);
+            }
+            return result;
+        }
     }
 
     private static String describeDifferences(DetailedDiff detailedDiff) {
         List<Difference> allDifferences = detailedDiff.getAllDifferences();
-        List<Difference> differences = allDifferences.stream()
-                .filter(diff -> !diff.isRecoverable())
-                .collect(toList());
+        List<Difference> differences = new ArrayList<>();
+        for (Difference difference : allDifferences) {
+            if (!difference.isRecoverable()) {
+                differences.add(difference);
+            }
+        }
 
         String result = "Found " + differences.size() + " differences: " + System.lineSeparator();
         for (int i = 0; i < differences.size(); i++) {
