@@ -3,6 +3,7 @@ package com.echatman.nextbus.response.messages;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 @XmlType
 public class RouteConfiguredForMessage {
 
-    private List<Stop> stops;
+    private List<Stop> stops = new ArrayList<>();
     private String tag;
 
     @XmlElement(name = "stop")

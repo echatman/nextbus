@@ -8,35 +8,33 @@ import com.echatman.nextbus.response.NextBusResponse;
 import com.echatman.nextbus.response.agencylist.AgencyListResponse;
 import com.echatman.nextbus.response.locations.VehicleLocationsResponse;
 import com.echatman.nextbus.response.messages.MessagesResponse;
-import com.echatman.nextbus.response.predictions.PredictionsResponse;
 import com.echatman.nextbus.response.predictions.PredictionsForMultiStopsResponse;
+import com.echatman.nextbus.response.predictions.PredictionsResponse;
 import com.echatman.nextbus.response.routeconfig.RouteConfigResponse;
 import com.echatman.nextbus.response.routelist.RouteListResponse;
 import com.echatman.nextbus.response.schedule.ScheduleResponse;
-import org.apache.http.HttpEntity;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.logging.Logger;
 
 /**
  * @author echatman
  */
 public class NextBusService {
+    private Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     public static final String BASE_URL = "http://webservices.nextbus.com/service/publicXMLFeed";
+    private static final XmlObjectParser xmlObjectParser = new XmlObjectParser(AgencyListResponse.class,
+            VehicleLocationsResponse.class, MessagesResponse.class, PredictionsResponse.class,
+            RouteConfigResponse.class, RouteListResponse.class, ScheduleResponse.class);
+    private static final HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
 
     /**
      * Obtain a list of available agencies.
@@ -117,44 +115,20 @@ public class NextBusService {
     }
 
     private <T extends NextBusResponse> T executeRequest(URI uri, Class<T> returnType) throws IOException, ClientProtocolException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = httpclient.execute(httpGet);
-        try {
-            HttpEntity entity = response.getEntity();
-            JAXBContext jc = JAXBContext.newInstance(returnType);
-            Unmarshaller unmarshaller = jc.createUnmarshaller();
-            JAXBElement<T> result = unmarshaller.unmarshal(new StreamSource(entity.getContent()), returnType);
-            EntityUtils.consume(entity);
-            T responseObject = result.getValue();
-            responseObject.setUrl(uri.toString());
-            return responseObject;
-        } catch (JAXBException e) {
-            // This indicates a bug in this library. Should hopefully never
-            // happen.
-            throw new RuntimeException(e);
-        } finally {
-            response.close();
-        }
+        GenericUrl genericUrl = new GenericUrl(uri);
+        logger.info("Fetching URL: " + genericUrl);
+        HttpRequest request = requestFactory.buildGetRequest(genericUrl).setParser(xmlObjectParser);
+        T responseObject = request.execute().parseAs(returnType);
+        responseObject.setUrl(uri.toString());
+        return responseObject;
     }
 
-    private URI toURI(URIBuilder uriBuilder) {
-        try {
-            return uriBuilder.build();
-        } catch (URISyntaxException e) {
-            // This indicates a bug in this library. Should hopefully never
-            // happen.
-            throw new RuntimeException(e);
-        }
+    private URI toURI(GenericUrl uriBuilder) {
+        return uriBuilder.toURI();
     }
 
-    private URIBuilder uriBuilder(String command) {
-        try {
-            return new URIBuilder(BASE_URL).setParameter("command", command);
-        } catch (URISyntaxException e) {
-            // This means the base URL is somehow invalid. Should never happen.
-            throw new RuntimeException(e);
-        }
+    private GenericUrl uriBuilder(String command) {
+        return new GenericUrl(BASE_URL).set("command", command);
     }
 
     URI buildAgencyListURI() {
@@ -162,75 +136,73 @@ public class NextBusService {
     }
 
     URI buildPredictionsURI(PredictionsRequest request) {
-        URIBuilder uriBuilder = uriBuilder("predictions");
-        uriBuilder.setParameter("a", request.getAgencyTag());
+        GenericUrl uriBuilder = uriBuilder("predictions");
+        uriBuilder.set("a", request.getAgencyTag());
         if (request.getRouteTag() != null) {
-            uriBuilder.setParameter("r", request.getRouteTag());
+            uriBuilder.set("r", request.getRouteTag());
         }
         if (request.getStopId() != null) {
-            uriBuilder.setParameter("stopId", request.getStopId());
+            uriBuilder.set("stopId", request.getStopId());
         }
         if (request.getStopTag() != null) {
-            uriBuilder.setParameter("s", request.getStopTag());
+            uriBuilder.set("s", request.getStopTag());
         }
         if (request.isUseShortTitles()) {
-            uriBuilder.setParameter("useShortTitles", "true");
+            uriBuilder.set("useShortTitles", "true");
         }
         return toURI(uriBuilder);
     }
 
     URI buildPredictionsForMultiStopsURI(PredictionsForMultiStopsRequest request) {
-        URIBuilder uriBuilder = uriBuilder("predictionsForMultiStops");
-        uriBuilder.setParameter("a", request.getAgencyTag());
-        for (String stop : request.getStops()) {
-            uriBuilder.addParameter("stops", stop);
-        }
+        GenericUrl uriBuilder = uriBuilder("predictionsForMultiStops");
+        uriBuilder.set("a", request.getAgencyTag());
+        uriBuilder.set("stops", request.getStops());
         if (request.isUseShortTitles()) {
-            uriBuilder.setParameter("useShortTitles", "true");
+            uriBuilder.set("useShortTitles", "true");
         }
         return toURI(uriBuilder);
     }
 
     URI buildRouteConfigURI(RouteConfigRequest request) {
-        URIBuilder uriBuilder = uriBuilder("routeConfig");
-        uriBuilder.setParameter("a", request.getAgencyTag());
+        GenericUrl uriBuilder = uriBuilder("routeConfig");
+        uriBuilder.set("a", request.getAgencyTag());
         if (request.getRouteTag() != null) {
-            uriBuilder.setParameter("r", request.getRouteTag());
+            uriBuilder.set("r", request.getRouteTag());
         }
         if (request.isTerse()) {
-            uriBuilder.setParameter("terse", "true");
+            uriBuilder.set("terse", "true");
         }
         if (request.isVerbose()) {
-            uriBuilder.setParameter("verbose", "true");
+            uriBuilder.set("verbose", "true");
         }
         return toURI(uriBuilder);
     }
 
     URI buildRouteListURI(String agencyTag) {
-        return toURI(uriBuilder("routeList").setParameter("a", agencyTag));
+        return toURI(uriBuilder("routeList").set("a", agencyTag));
     }
 
     URI buildVehicleLocationsURI(String agencyTag, String routeTag, long lastTime) {
         return toURI(uriBuilder("vehicleLocations")
-                .setParameter("a", agencyTag)
-                .setParameter("r", routeTag)
-                .setParameter("t", Long.toString(lastTime))
+                .set("a", agencyTag)
+                .set("r", routeTag)
+                .set("t", Long.toString(lastTime))
         );
     }
 
     URI buildMessagesURI(String agencyTag, String...routeTags) {
-        URIBuilder uriBuilder = uriBuilder("messages")
-                .setParameter("a", agencyTag);
-        for (String routeTag : routeTags) {
-            uriBuilder.addParameter("r", routeTag);
+        GenericUrl uriBuilder = uriBuilder("messages")
+                .set("a", agencyTag);
+        if (routeTags.length > 0) {
+            uriBuilder.set("r", Arrays.asList(routeTags));
         }
         return toURI(uriBuilder);
     }
 
     URI buildScheduleURI(String agencyTag, String routeTag) {
         return toURI(uriBuilder("schedule")
-            .setParameter("a", agencyTag)
-            .setParameter("r", routeTag));
+            .set("a", agencyTag)
+            .set("r", routeTag));
     }
 
 }

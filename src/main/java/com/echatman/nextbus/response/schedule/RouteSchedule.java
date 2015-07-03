@@ -1,6 +1,7 @@
 package com.echatman.nextbus.response.schedule;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +11,8 @@ import java.util.List;
 public class RouteSchedule {
 
     private String direction;
-    private List<StopTitle> header;
-    private List<TableRow> row;
+    private List<StopTitle> header = new ArrayList<>();
+    private List<TableRow> row = new ArrayList<>();
     private String scheduleClass;
     private String serviceClass;
     private String tag;

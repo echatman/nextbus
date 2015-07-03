@@ -3,6 +3,7 @@ package com.echatman.nextbus.response.routeconfig;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
 public class Direction {
 
     private String name;
-    private List<StopRef> stops;
+    private List<StopRef> stops = new ArrayList<>();
     private String tag;
     private String title;
     private Boolean useForUI;

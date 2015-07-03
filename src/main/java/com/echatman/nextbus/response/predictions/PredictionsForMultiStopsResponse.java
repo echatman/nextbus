@@ -5,6 +5,7 @@ import com.echatman.nextbus.response.NextBusResponse;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,7 +73,7 @@ import java.util.List;
 @XmlType
 public class PredictionsForMultiStopsResponse extends NextBusResponse {
 
-    private List<Predictions> predictions;
+    private List<Predictions> predictions = new ArrayList<>();
 
     @XmlElement
     public List<Predictions> getPredictions() {

@@ -5,6 +5,7 @@ import com.echatman.nextbus.response.NextBusResponse;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ import java.util.List;
 @XmlType
 public class AgencyListResponse extends NextBusResponse {
 
-    private List<Agency> agencies;
+    private List<Agency> agencies = new ArrayList<>();
 
     @XmlElement(name = "agency")
     public List<Agency> getAgencies() {

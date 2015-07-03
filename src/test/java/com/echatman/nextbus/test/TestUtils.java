@@ -2,15 +2,12 @@
 package com.echatman.nextbus.test;
 
 import com.echatman.nextbus.response.NextBusResponse;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.javanet.NetHttpTransport;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.custommonkey.xmlunit.*;
 import org.w3c.dom.Node;
 
@@ -33,7 +30,7 @@ import static org.junit.Assert.fail;
  * @author echatman
  */
 public class TestUtils {
-
+    private static final HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
     private static int failureIndex = 0;
 
     /**
@@ -222,23 +219,6 @@ public class TestUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = httpclient.execute(httpGet);
-        try {
-            HttpEntity entity = response.getEntity();
-            String result = IOUtils.toString(entity.getContent());
-            EntityUtils.consume(entity);
-            return result;
-        } finally {
-            response.close();
-        }
-    }
-
-    public static InputStream getURIContentsAsStream(URI uri) throws IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse response = httpclient.execute(httpGet);
-        return response.getEntity().getContent();
+        return requestFactory.buildGetRequest(new GenericUrl(uri)).execute().parseAsString();
     }
 }

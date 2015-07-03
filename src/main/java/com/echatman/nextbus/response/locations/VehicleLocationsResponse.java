@@ -5,6 +5,7 @@ import com.echatman.nextbus.response.NextBusResponse;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,7 +90,7 @@ import java.util.List;
 public class VehicleLocationsResponse extends NextBusResponse {
 
     private LastTime lastTime;
-    private List<Vehicle> vehicles;
+    private List<Vehicle> vehicles = new ArrayList<>();
 
     /**
      * Contains the update time of the last vehicle location

@@ -2,6 +2,7 @@ package com.echatman.nextbus.response.routeconfig;
 
 import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,9 @@ public class RouteConfig {
     private BigDecimal latMax;
     private BigDecimal lonMin;
     private BigDecimal lonMax;
-    private List<StopConfig> stops;
-    private List<Direction> directions;
-    private List<Path> paths;
+    private List<StopConfig> stops = new ArrayList<>();
+    private List<Direction> directions = new ArrayList<>();
+    private List<Path> paths = new ArrayList<>();
 
     /**
      * the color in hexadecimal format associated with the route. Useful for

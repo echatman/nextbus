@@ -3,6 +3,7 @@ package com.echatman.nextbus.response.schedule;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
 public class TableRow {
 
     private String blockID;
-    private List<ScheduledStop> stops;
+    private List<ScheduledStop> stops = new ArrayList<>();
 
     @XmlAttribute
     public String getBlockID() {

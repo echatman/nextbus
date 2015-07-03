@@ -2,6 +2,7 @@ package com.echatman.nextbus.response.routeconfig;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,8 +11,8 @@ import java.util.List;
 @XmlType
 public class Path {
 
-    private List<Tag> tags;
-    private List<Point> points;
+    private List<Tag> tags = new ArrayList<>();
+    private List<Point> points = new ArrayList<>();
 
     @XmlElement(name = "point")
     public List<Point> getPoints() {

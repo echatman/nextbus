@@ -5,6 +5,7 @@ import com.echatman.nextbus.response.NextBusResponse;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ import java.util.List;
  */
 @XmlType
 public class ScheduleResponse extends NextBusResponse {
-    private List<RouteSchedule> routes;
+    private List<RouteSchedule> routes = new ArrayList<>();
 
     @XmlElement(name = "route")
     public List<RouteSchedule> getRoutes() {

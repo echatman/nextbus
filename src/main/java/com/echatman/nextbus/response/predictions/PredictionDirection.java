@@ -3,6 +3,7 @@ package com.echatman.nextbus.response.predictions;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
 @XmlType
 public class PredictionDirection {
 
-    private List<Prediction> predictions;
+    private List<Prediction> predictions = new ArrayList<>();
     private String title;
 
     /**

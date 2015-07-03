@@ -3,6 +3,7 @@ package com.echatman.nextbus.response.messages;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,11 @@ public class Message {
     private Long endBoundary;
     private String endBoundaryStr;
     private String id;
-    private List<Interval> intervals;
+    private List<Interval> intervals = new ArrayList<>();
     private String phonemeText;
     private Short priorityElement;
     private String priorityAttribute;
-    private List<RouteConfiguredForMessage> routesConfiguredForMessage;
+    private List<RouteConfiguredForMessage> routesConfiguredForMessage = new ArrayList<>();
     private Boolean sendToBuses;
     private String smsText;
     private Long startBoundary;
