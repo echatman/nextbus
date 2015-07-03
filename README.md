@@ -1,5 +1,7 @@
-nextbus
+nextbus [![Build Status](https://travis-ci.org/echatman/nextbus.svg?branch=master)](https://travis-ci.org/echatman/nextbus)
 =======
+
+
 
 Simple Java client for the NextBus API.
 
