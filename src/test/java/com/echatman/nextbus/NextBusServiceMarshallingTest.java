@@ -48,7 +48,7 @@ public class NextBusServiceMarshallingTest {
 
     // There are a lot of tests that get run once for every agency.
     // Higher number = much more thorough testing, but a lot slower.
-    private final static int MAX_AGENCIES = 20;
+    private final static int MAX_AGENCIES = 100;
 
     public static List<String> getAgencies() throws Exception {
         if (agencies == null) {

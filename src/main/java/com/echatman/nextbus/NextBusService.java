@@ -116,7 +116,7 @@ public class NextBusService {
 
     private <T extends NextBusResponse> T executeRequest(URI uri, Class<T> returnType) throws IOException, ClientProtocolException {
         GenericUrl genericUrl = new GenericUrl(uri);
-        logger.info("Fetching URL: " + genericUrl);
+        logger.fine("Fetching URL: " + genericUrl);
         HttpRequest request = requestFactory.buildGetRequest(genericUrl).setParser(xmlObjectParser);
         T responseObject = request.execute().parseAs(returnType);
         responseObject.setUrl(uri.toString());
