@@ -24,12 +24,14 @@ public class PredictionsForMultiStopsRequest {
         addStop(routeTag2, stopTag2);
     }
 
-    public void addStop(String routeTag, String stopTag) {
+    public PredictionsForMultiStopsRequest addStop(String routeTag, String stopTag) {
         stops.add(routeTag + '|' + stopTag);
+        return this;
     }
 
-    public void setUseShortTitles(boolean useShortTitles) {
+    public PredictionsForMultiStopsRequest setUseShortTitles(boolean useShortTitles) {
         this.useShortTitles = useShortTitles;
+        return this;
     }
 
     public String getAgencyTag() {

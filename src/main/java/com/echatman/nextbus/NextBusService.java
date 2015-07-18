@@ -33,7 +33,8 @@ public class NextBusService {
     public static final String BASE_URL = "http://webservices.nextbus.com/service/publicXMLFeed";
     private static final XmlObjectParser xmlObjectParser = new XmlObjectParser(AgencyListResponse.class,
             VehicleLocationsResponse.class, MessagesResponse.class, PredictionsResponse.class,
-            RouteConfigResponse.class, RouteListResponse.class, ScheduleResponse.class);
+            PredictionsForMultiStopsResponse.class, RouteConfigResponse.class, RouteListResponse.class,
+            ScheduleResponse.class);
     private static final HttpRequestFactory requestFactory = new NetHttpTransport().createRequestFactory();
 
     /**

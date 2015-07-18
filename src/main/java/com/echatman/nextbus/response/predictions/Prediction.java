@@ -277,4 +277,24 @@ public class Prediction {
     private void setVehiclesInConsist(String vehiclesInConsist) {
         this.vehiclesInConsist = vehiclesInConsist;
     }
+
+    @Override
+    public String toString() {
+        return "Prediction{" +
+                "affectedByLayover=" + affectedByLayover +
+                ", block='" + block + '\'' +
+                ", branch='" + branch + '\'' +
+                ", delayed=" + delayed +
+                ", dirTag='" + dirTag + '\'' +
+                ", epochTime=" + epochTime +
+                ", isDeparture=" + isDeparture +
+                ", isScheduleBased=" + isScheduleBased +
+                ", minutes=" + minutes +
+                ", seconds=" + seconds +
+                ", slowness='" + slowness + '\'' +
+                ", tripTag='" + tripTag + '\'' +
+                ", vehicle='" + vehicle + '\'' +
+                ", vehiclesInConsist='" + vehiclesInConsist + '\'' +
+                '}';
+    }
 }
